@@ -1,9 +1,12 @@
+
 let shopYog = document.getElementById("shopYog");
 const verCarrito = document.getElementById("verCarrito");
 const seccionContainer = document.getElementById("seccionContainer");
 
 let productos = [
   {
+    id:1,
+    imagen:"rodillo-de-jade.jpg",
     nombre: "rodillo de jade",
     unidades: 2,
     material: "cuarzo",
@@ -11,6 +14,8 @@ let productos = [
     colores: ["rosa", "magenta", "violeta"]
   },
   {
+    id:2,
+    imagen:"masajedor.jpg",
     nombre: "masajedora eléctrico",
     unidades: 1,
     material: "cuarzo",
@@ -18,6 +23,8 @@ let productos = [
     colores: ["magenta", "verde"]
   },
   {
+    id:3,
+   imagen:"gua-sha.jpg",
     nombre: "gua sha",
     unidades: 1,
     material: "cuarzo",
@@ -25,6 +32,8 @@ let productos = [
     colores: ["amarillo", "verde", "magenta"]
   },
   {
+    id:4,
+    imagen:"siliconas.jpg",
     nombre: "bolsas de masaje",
     unidades: 8,
     material: "silicona",
@@ -35,7 +44,7 @@ let productos = [
 
 let carrito = [];
 
-//  cargar el carrito desde el LocalStorage
+// Función para cargar el carrito desde el LocalStorage
 function cargarCarritoDesdeLocalStorage() {
   const carritoGuardado = JSON.parse(localStorage.getItem('carrito'));
   if (carritoGuardado) {
@@ -43,7 +52,7 @@ function cargarCarritoDesdeLocalStorage() {
   }
 }
 
-//carrito en el LocalStorage
+// Función para guardar el carrito en el LocalStorage
 function guardarCarritoEnLocalStorage() {
   localStorage.setItem('carrito', JSON.stringify(carrito));
 }
@@ -59,17 +68,19 @@ productos.forEach((product) => {
   let contenido = document.createElement("div");
   contenido.className = "card";
   contenido.innerHTML = `
-      <h3>${product.nombre}</h3>
+    <img src=./imagenes/${product.imagen} 
+    />
+    <h3>${product.nombre}</h3>
       <p>Unidades disponibles: ${product.unidades}</p>
       <p>Material: ${product.material}</p>
       <p>Precio: ${product.precio} $</p>
       <p>Colores disponibles: ${product.colores.join(', ')} </p>
-    `;
+     `;
 
   let comprar = document.createElement("button");
   comprar.innerText = "Comprar";
 
-  contenido.appendChild(comprar);
+  contenido.append(comprar);
   shopYog.appendChild(contenido);
 
   // Evento comprar
@@ -117,8 +128,9 @@ verCarrito.addEventListener("click", () => {
   // Recorrer y mostrar los productos en el carrito
   carrito.forEach((product, index) => {
     let carritoContent = document.createElement("div");
-    carritoContent.className = "carito-estilos";
+    carritoContent.className = "carrito";
     carritoContent.innerHTML = `
+         
         <h3>${product.nombre}</h3>
         <p>Cantidad: ${product.unidades}</p>
         <p>Material: ${product.material}</p>
@@ -145,7 +157,7 @@ verCarrito.addEventListener("click", () => {
   // Mostrar el total a pagar
   let totalBuy = document.createElement("div");
   totalBuy.id = "totalBuy";
-  totalBuy.className = "total-content";
+  totalBuy.className = "total";
   updateCartTotal();
   cPrincipal.appendChild(totalBuy);
 

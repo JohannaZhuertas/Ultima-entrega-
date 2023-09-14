@@ -111,3 +111,7 @@ img{
   #total{
     background-color: #ff0000;
   }
+
+  #eliminarP{
+    cursor: pointer;
+  }

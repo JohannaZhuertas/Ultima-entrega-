@@ -1,0 +1,53 @@
+[
+    {
+        "id": 1,
+        "imagen": "rodillo-de-jade.jpg",
+        "nombre": "rodillo de jade",
+        "unidades": 1,
+        "material": "cuarzo",
+        "precio": 1500,
+        "colores": [
+            "rosa",
+            "magenta",
+            "violeta"
+        ]
+    },
+    {
+        "id": 2,
+        "imagen": "masajeador.jpg",
+        "nombre": "masajedor eléctrico",
+        "unidades": 1,
+        "material": "cuarzo",
+        "precio": 1650,
+        "colores": [
+            "magenta",
+            "verde"
+        ]
+    },
+    {
+        "id": 3,
+        "imagen": "gua-sha.jpg",
+        "nombre": "gua sha",
+        "unidades": 1,
+        "material": "cuarzo",
+        "precio": 999,
+        "colores": [
+            "amarillo",
+            "verde",
+            "magenta"
+        ]
+    },
+    {
+        "id": 4,
+        "imagen": "siliconas.jpg",
+        "nombre": "bolsas de masaje",
+        "unidades": 1,
+        "material": "silicona",
+        "precio": 1700,
+        "colores": [
+            "amarillo",
+            "magenta",
+            "verde"
+        ]
+    }
+]

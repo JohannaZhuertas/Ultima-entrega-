@@ -7,66 +7,17 @@ let boton = document.getElementById("boton");
 let totalBuy = document.createElement("div"); // Crear el elemento una sola vez
 totalBuy.style.display = "block";
 
+///////////////////////////// filtro productos 
 
- 
-  ///////////////////////////// filtro productos 
- 
-  function abarcativa() {
-    let productos = [
-      {
-        id: 1,
-        imagen: "rodillo-de-jade.jpg",
-        nombre: "rodillo de jade",
-        unidades: 1,
-        material: "cuarzo",
-        precio: 1500,
-        colores: ["rosa", "magenta", "violeta"]
-      },
-      {
-        id: 2,
-        imagen: "masajeador.jpg",
-        nombre: "masajedora eléctrico",
-        unidades: 1,
-        material: "cuarzo",
-        precio: 1650,
-        colores: ["magenta", "verde"]
-      },
-      {
-        id: 3,
-        imagen: "gua-sha.jpg",
-        nombre: "gua sha",
-        unidades: 1,
-        material: "cuarzo",
-        precio: 999,
-        colores: ["amarillo", "verde", "magenta"]
-      },
-      {
-        id: 4,
-        imagen:"siliconas.jpg",
-        nombre: "bolsas de masaje",
-        unidades: 1,
-        material: "silicona",
-        precio: 1700,
-        colores: ["amarillo", "magenta", "verde"]
-      }
-    ];
-  
-    boton.addEventListener("click", () => filtroDeProductos(productos, buscador));
-  
-    buscarProductos(productos);
-  }
-  
-  abarcativa();
-  
-  
-  function filtroDeProductos(productos, input) {
-    let filtroNombre = productos.filter(producto => producto.nombre.toLowerCase().includes(input.value.toLowerCase()));
-    buscarProductos(filtroNombre);
-  
-  
-  }
-  
+function abarcativa(productos) {
+  boton.addEventListener("click", () => filtroDeProductos(productos, buscador));
+  buscarProductos(productos);
+}
 
+function filtroDeProductos(productos, input) {
+  let filtroNombre = productos.filter(producto => producto.nombre.toLowerCase().includes(input.value.toLowerCase()));
+  buscarProductos(filtroNombre);
+}
 
 let carrito = [];
 
@@ -95,7 +46,6 @@ function cardTotal() {
     totalBuy.style.display = "none";
   }
 }
-
 
 let finalizarCompra = document.createElement("button");
 finalizarCompra.innerText = "Finalizar compra✔️";
@@ -146,7 +96,7 @@ function buscarProductos(productoBuscar) {
           id: product.id,
           imagen: product.imagen,
           nombre: product.nombre,
-          unidades: product.unidades,
+          unidades: 1, // Inicializamos unidades a 1
           material: product.material,
           precio: product.precio,
           colores: product.colores
@@ -156,7 +106,7 @@ function buscarProductos(productoBuscar) {
         guardarCarritoEnLocalStorage();
       }
 
-      lanzarAlerta("Tu producto ya esta en el carrito")
+      lanzarAlerta("Tu producto ya está en el carrito")
     });
   });
 }
@@ -183,9 +133,6 @@ verCarrito.addEventListener("click", () => {
 
   cPrincipal.appendChild(buttonCarrito);
 
-
-
-
   //////////////////// Recorrer y mostrar los productos en el carrito 
   carrito.forEach((product, index) => {
     let carritoContent = document.createElement("div");
@@ -201,7 +148,6 @@ verCarrito.addEventListener("click", () => {
     `;
 
     ////////////////////////////////////////////////// finalizar  compra ////////////////////////////
-
 
     let eliminarProducto = document.createElement("span");
     eliminarProducto.innerText = "❌";
@@ -227,12 +173,26 @@ cargarCarritoDesdeLocalStorage();
 cardTotal();
 
 /////////////////////////////////////Alert
+
 function lanzarAlerta(text) {
   Toastify({
     text: text,
     duration: 1000,
     position: "center",
+    style: {
+      background: "#A1225D"
+    }
 
   }).showToast();
-};
+}
 
+// Cargar los productos desde el archivo JSON
+fetch("./data.json")
+  .then(respuesta => respuesta.json())
+  .then(productos => {
+abarcativa(productos); // Llamar a la función principal con los datos cargados
+  })
+  .catch(error => {
+    console.log(error);
+    lanzarAlerta("Hubo un error al cargar los productos");
+  });
